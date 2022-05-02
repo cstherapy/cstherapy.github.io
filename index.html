@@ -1,0 +1,362 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>CAT-SOOP</title>
+        <link
+            href="data:image/gif;base64,R0lGODlhEAAQAKECAAAAAAAzZv///////yH5BAEKAAMALAAAAAAQABAAAAIpnI+pi+DjAHztSAkVnri/fRmb9WUmg6ZoxLUsmIVyKbdijIPfHqq+WgAAOw=="
+            rel="icon"
+            type="image/gif"
+        />
+        <!-- stylesheet -->
+        <link href="https://catsoop.mit.edu/_static/_base/themes/base.css" rel="stylesheet" type="text/css" />
+        <!-- set up JS namespace for catsoop -->
+        <script type="text/javascript">
+            // @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3
+            var catsoop = { plugins: {} };
+
+            function toggleResponsiveHeader() {
+                document.getElementsByTagName("header")[0].classList.toggle("responsive");
+            }
+
+            window.addEventListener("DOMContentLoaded", function () {
+                var menu_boxes = document.getElementsByClassName("dropdown-checkbox");
+                for (var i = 0; i < menu_boxes.length; i++) {
+                    menu_boxes[i].checked = false;
+                }
+            });
+
+            function clearMenu(menu) {
+                menu.children[1].checked = false;
+            }
+            // @license-end
+        </script>
+        <!-- load in katex and CAT-SOOP-specific math rendering  -->
+        <script src="https://catsoop.mit.edu/_static/_base/scripts/katex/katex.min.js" type="text/javascript"></script>
+        <link href="https://catsoop.mit.edu/_static/_base/scripts/katex/katex.min.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">
+            // @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3
+            catsoop.katex_macros = {};
+            catsoop.render_math = function (elt) {
+                var tex = elt.innerText; // TeX Source
+                var display = elt.classList.contains("cs_displaymath");
+                try {
+                    katex.render(tex, elt, { displayMode: display, macros: catsoop.katex_macros });
+                } catch (e) {
+                    console.log(e);
+                    elt.innerHTML = "<font color='red'><b>Could not parse math:</b> <tt>" + tex + "</tt></font>";
+                }
+                elt.classList.remove("cs_math_to_render");
+            };
+
+            catsoop.render_all_math = function (elt) {
+                var mathelts = elt.getElementsByClassName("cs_math_to_render");
+                while (mathelts.length > 0) {
+                    catsoop.render_math(mathelts[0]);
+                }
+            };
+            document.addEventListener("DOMContentLoaded", function (event) {
+                catsoop.render_all_math(document);
+            });
+            // @license-end
+        </script>
+        <!-- load in diagram stuff -->
+        <script src="https://catsoop.mit.edu/_static/_base/scripts/cs_diagrams.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            catsoop.diagram_sources = {};
+        </script>
+        <!-- Syntax Highlighting -->
+        <script src="https://catsoop.mit.edu/_static/_base/scripts/highlight/highlight.min.js" type="text/javascript"></script>
+        <script src="https://catsoop.mit.edu/_static/_base/scripts/highlightjs-line-numbers.js" type="text/javascript"></script>
+        <style type="text/css">
+            .hljs-ln {
+                border-collapse: collapse;
+            }
+            .hljs-ln td {
+                padding: 0;
+            }
+            .hljs-ln-n:before {
+                content: attr(data-line-number);
+            }
+        </style>
+        <script type="text/javascript">
+            // @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3
+            hljs.initHighlightingOnLoad();
+            window.addEventListener("DOMContentLoaded", function () {
+                document.querySelectorAll(".hl code").forEach((block) => {
+                    hljs.highlightBlock(block);
+                });
+                document.querySelectorAll("code.highlight-lines").forEach(function (b) {
+                    hljs.lineNumbersBlock(b);
+                    if ((b.innerHTML.trim().match(/\r\n|\r|\n/g) || []).length > 0) {
+                        b.parentElement.style = "padding-left: 0px !important;";
+                        b.classList.add("hljs");
+                    }
+                });
+            });
+            // @license-end
+        </script>
+        <style>
+            :root {
+                --cs-base-bg-color: #2572f5;
+                --cs-light-bg-color: #8cb6ff;
+                --cs-base-font-color: #fff;
+                --cs-light-font-color: #000;
+            }
+        </style>
+        <script src="https://catsoop.mit.edu/_static/_handler/default/cs_ajax.js" type="text/javascript"></script>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+    </head>
+
+    <body style="margin: 0px" class="vsc-initialized" cz-shortcut-listen="true">
+        <header id="cs_header">
+            <div class="nav-container">
+                <div class="cs_header_text"><a href="#">COURSE SIX THERAPY</a></div>
+            </div>
+        </header>
+
+        <div class="cs_navigation cs_top_navigation" id="cs_top_navigation"></div>
+
+        <div style="margin: 20px 20vw 20px 20vw">
+            <div style="text-align: center;">
+                <h1>Problem Set</h1>
+                <p>Stressed and tired from your psets? Ever reran your code just to see those green marks of validation?</p>
+                <p>MIT CS (Course Six) therapy is here to help.</p>
+                <p>Created by Sandra Tang, MIT '23</p>
+                <br>
+            </div>
+            
+            <!-- PROBLEM 1 -->
+            <div style="border-radius: 10px; border: 1px solid #000000; padding: 20px; margin-bottom: 20px;">
+                <h2>1) Code Submission</h2>
+                <p>Submit your favorite code.</p>
+                <textarea rows="20" style="width: 100%; max-width: 100%"></textarea>
+                <br />
+
+                <button class="save btn btn-catsoop" style="margin-top: 10px">
+                    Save
+                </button>
+                <button
+                    onclick="toggleText1()"
+                    class="submit btn btn-catsoop"
+                    style="margin-top: 10px"
+                >
+                    Submit
+                </button>
+                <button
+                    class="viewanswer btn btn-catsoop"
+                    style="margin-top: 10px"
+                >
+                    View Answer
+                </button>
+                <p id="green-score-1" style="display: none; color: #0ad22b"><b>100.00%</b></p>
+                <p><i>You have infinite submissions remaining.</i></p>
+            </div>
+
+            <!-- PROBLEM 2 -->
+            <div style="border-radius: 10px; border: 1px solid #000000; padding: 20px; margin-bottom: 20px;">
+                <h2>2) Short Answer</h2>
+                <p>What is the answer to this question?</p>
+                <input style="width: 100%; max-width: 100%"></input>
+                <br />
+                <button class="save btn btn-catsoop" style="margin-top: 10px">
+                    Save
+                </button>
+                <button
+                    onclick="toggleText2()"
+                    class="submit btn btn-catsoop"
+                    style="margin-top: 10px"
+                >
+                    Submit
+                </button>
+                <button
+                    class="viewanswer btn btn-catsoop"
+                    style="margin-top: 10px"
+                >
+                    View Answer
+                </button>
+                <p id="green-score-2" style="display: none; color: #0ad22b"><b>100.00%</b></p>
+                <p><i>You have infinite submissions remaining.</i></p>
+            </div>
+
+            <!-- PROBLEM 3 -->
+            <div style="border-radius: 10px; border: 1px solid #000000; padding: 20px; margin-bottom: 20px;">
+                <h2>3) Dropdown Select</h2>
+                
+                <label for="cars">Choose an answer:</label>
+                <select name="cars" id="cars">
+                    <option value="volvo">A</option>
+                    <option value="saab">B</option>
+                    <option value="opel">C</option>
+                    <option value="audi">D</option>
+                </select>
+
+                <br />
+                <button class="save btn btn-catsoop" style="margin-top: 10px">
+                    Save
+                </button>
+                <button
+                    onclick="toggleText3()"
+                    class="submit btn btn-catsoop"
+                    style="margin-top: 10px"
+                >
+                    Submit
+                </button>
+                <button
+                    class="viewanswer btn btn-catsoop"
+                    style="margin-top: 10px"
+                >
+                    View Answer
+                </button>
+                <p id="green-score-3" style="display: none; color: #0ad22b"><b>100.00%</b></p>
+                <p><i>You have infinite submissions remaining.</i></p>
+            </div>
+
+            <!-- PROBLEM 4 -->
+            <div style="border-radius: 10px; border: 1px solid #000000; padding: 20px; margin-bottom: 20px;">
+                <h2>4) Select All</h2>
+
+                <div class="w3-col s4">
+                    <p>Choose as many as you'd like:</p>
+                    <input type="checkbox"> A<br>
+                    <input type="checkbox"> B<br>
+                    <input type="checkbox"> C<br>
+                    <input type="checkbox"> D<br><br>
+                </div>
+
+                <br />
+                <button class="save btn btn-catsoop" style="margin-top: 10px">
+                    Save
+                </button>
+                <button
+                    onclick="toggleText4()"
+                    class="submit btn btn-catsoop"
+                    style="margin-top: 10px"
+                >
+                    Submit
+                </button>
+                <button
+                    class="viewanswer btn btn-catsoop"
+                    style="margin-top: 10px"
+                >
+                    View Answer
+                </button>
+                <p id="green-score-4" style="display: none; color: #0ad22b"><b>100.00%</b></p>
+                <p><i>You have infinite submissions remaining.</i></p>
+            </div>
+
+            <!-- PROBLEM 5 -->
+            <div style="border-radius: 10px; border: 1px solid #000000; padding: 20px; margin-bottom: 20px;">
+                <h2>5) Multiple Choice</h2>
+
+                <div class="w3-col s4">
+                    <p>Choose one:</p>
+                    <input type="radio" name="same"> A<br>
+                    <input type="radio" name="same"> B<br>
+                    <input type="radio" name="same"> C<br>
+                    <input type="radio" name="same"> D<br>
+                </div>
+
+                <br />
+                <button class="save btn btn-catsoop" style="margin-top: 10px">
+                    Save
+                </button>
+                <button
+                    onclick="toggleText5()"
+                    class="submit btn btn-catsoop"
+                    style="margin-top: 10px"
+                >
+                    Submit
+                </button>
+                <button
+                    class="viewanswer btn btn-catsoop"
+                    style="margin-top: 10px"
+                >
+                    View Answer
+                </button>
+                <p id="green-score-5" style="display: none; color: #0ad22b"><b>100.00%</b></p>
+                <p><i>You have infinite submissions remaining.</i></p>
+            </div>
+
+            <!-- END -->
+        </div>
+
+        <script>
+            function toggleText1() {
+                var text = document.getElementById("green-score-1");
+                if (text.style.display === "none") {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+            }
+        </script>
+
+        <script>
+            function toggleText2() {
+                var text = document.getElementById("green-score-2");
+                if (text.style.display === "none") {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+            }
+        </script>
+
+        <script>
+            function toggleText3() {
+                var text = document.getElementById("green-score-3");
+                if (text.style.display === "none") {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+            }
+        </script>
+
+        <script>
+            function toggleText4() {
+                var text = document.getElementById("green-score-4");
+                if (text.style.display === "none") {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+            }
+        </script>
+
+        <script>
+            function toggleText5() {
+                var text = document.getElementById("green-score-5");
+                if (text.style.display === "none") {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+            }
+        </script>
+
+
+        <!-- NOTE -- MAKE NOT STICKY
+<footer>
+<div class="cs_navigation cs_bottom_navigation" id="cs_bottom_navigation"></div>
+<div class="cs_footer">
+      The content of this page is Copyright © 2016-2021 by the CAT-SOOP Developers.<br>
+This content is licensed under the <a href="https://catsoop.mit.edu/_util/license" target="_blank">GNU Affero General Public License, version 3</a>, as is CAT-SOOP itself.<br>
+The original form of this content is source code in the CAT-SOOP specification format.<br>
+The source code is available in the <code>website</code> directory of the Git repository at the following address:<br>
+<a href="https://catsoop.mit.edu/cgit/catsoop.git"><code>https://catsoop.mit.edu/cgit/catsoop.git</code></a>.<br><hr style="background-color:#000000;border-color:#000000" width="300">
+<pre class="catsooplogo" style="font-size:50%;">\            
+/    /\__/\  
+\__=(  o_O )=
+(__________) 
+ |_ |_ |_ |_ 
+</pre>
+      Powered by <a href="https://catsoop.mit.edu" target="_blank">CAT-SOOP</a> v2022.2.0.dev9 "Highlander" (development snapshot).<br>
+      CAT-SOOP is <a href="https://www.fsf.org/about/what-is-free-software" target="_blank">Free/Libre Software</a>, available under the terms<br>of the <a href="https://catsoop.mit.edu/_util/license" target="_blank">GNU Affero General Public License, version 3</a>.<br>
+<a download="" href="https://catsoop.mit.edu/_util/source.zip" target="_blank">Download Source Code</a><br>
+<a href="https://catsoop.mit.edu/_util/jslicense.html" rel="jslicense" target="_blank">Javascript License Information</a>
+</div>
+</footer>
+-->
+    </body>
+</html>
