@@ -77,6 +77,28 @@
             .hljs-ln-n:before {
                 content: attr(data-line-number);
             }
+            @media only screen and (max-width: 824px) {
+                .container {
+                    margin: 20px 5vw 20px 5vw;
+                }
+                .custom_header_long {
+                    display: none
+                }
+                .custom_header_short {
+                    display: inline
+                }
+            }
+            @media only screen and (min-width: 825px) {
+                .container {
+                    margin: 20px 25vw 20px 25vw;
+                }
+                .custom_header_long {
+                    display: inline
+                }
+                .custom_header_short {
+                    display: none
+                }
+            }
         </style>
         <script type="text/javascript">
             // @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-v3
@@ -110,13 +132,13 @@
     <body style="margin: 0px" class="vsc-initialized" cz-shortcut-listen="true">
         <header id="cs_header">
             <div class="nav-container">
-                <div class="cs_header_text"><a href="#">COURSE SIX THERAPY</a></div>
+                <div class="cs_header_text"><a href="#"><p class="custom_header_long">COURSE SIX THERAPY</p><p class="custom_header_short">CSTHERAPY</p></a></div>
             </div>
         </header>
 
         <div class="cs_navigation cs_top_navigation" id="cs_top_navigation"></div>
 
-        <div style="margin: 20px 25vw 20px 25vw;">
+        <div class="container">
             <div style="text-align: center;">
                 <h1>Problem Set</h1>
                 <p>Stressed and tired from your psets? Ever reran your code just to see those green marks of validation?</p>
@@ -142,6 +164,7 @@
                     Submit
                 </button>
                 <button
+                    onclick="toggleViewAnswer1()"
                     class="viewanswer btn btn-catsoop"
                     style="margin-top: 10px"
                 >
@@ -149,6 +172,9 @@
                 </button>
                 <p id="green-score-1" style="display: none; color: #0ad22b"><b>100.00%</b></p>
                 <p><i>You have infinite submissions remaining.</i></p>
+                <div id="view-answer-1" style="border-radius: 10px; border: 1px solid #000000; padding: 10px; margin-bottom: 10px; display: none;">
+                    <p>Solution: Your favorite code! Anything that excites you.</p>
+                </div>
             </div>
 
             <!-- PROBLEM 2 -->
@@ -168,6 +194,7 @@
                     Submit
                 </button>
                 <button
+                    onclick="toggleViewAnswer2()"
                     class="viewanswer btn btn-catsoop"
                     style="margin-top: 10px"
                 >
@@ -175,6 +202,9 @@
                 </button>
                 <p id="green-score-2" style="display: none; color: #0ad22b"><b>100.00%</b></p>
                 <p><i>You have infinite submissions remaining.</i></p>
+                <div id="view-answer-2" style="border-radius: 10px; border: 1px solid #000000; padding: 10px; margin-bottom: 10px; display: none;">
+                    <p>Solution: Anything you'd like. You're doing great!</p>
+                </div>
             </div>
 
             <!-- PROBLEM 3 -->
@@ -201,6 +231,7 @@
                     Submit
                 </button>
                 <button
+                    onclick="toggleViewAnswer3()"    
                     class="viewanswer btn btn-catsoop"
                     style="margin-top: 10px"
                 >
@@ -208,6 +239,9 @@
                 </button>
                 <p id="green-score-3" style="display: none; color: #0ad22b"><b>100.00%</b></p>
                 <p><i>You have infinite submissions remaining.</i></p>
+                <div id="view-answer-3" style="border-radius: 10px; border: 1px solid #000000; padding: 10px; margin-bottom: 10px; display: none;">
+                    <p>Solution: Any answer, or none at all. No pressure.</p>
+                </div>
             </div>
 
             <!-- PROBLEM 4 -->
@@ -234,6 +268,7 @@
                     Submit
                 </button>
                 <button
+                    onclick="toggleViewAnswer4()"
                     class="viewanswer btn btn-catsoop"
                     style="margin-top: 10px"
                 >
@@ -241,6 +276,9 @@
                 </button>
                 <p id="green-score-4" style="display: none; color: #0ad22b"><b>100.00%</b></p>
                 <p><i>You have infinite submissions remaining.</i></p>
+                <div id="view-answer-4" style="border-radius: 10px; border: 1px solid #000000; padding: 10px; margin-bottom: 10px; display: none;">
+                    <p>Solution: Any compbination, including the empty set. Don't sweat it.</p>
+                </div>
             </div>
 
             <!-- PROBLEM 5 -->
@@ -267,6 +305,7 @@
                     Submit
                 </button>
                 <button
+                    onclick="toggleViewAnswer5()"
                     class="viewanswer btn btn-catsoop"
                     style="margin-top: 10px"
                 >
@@ -274,6 +313,9 @@
                 </button>
                 <p id="green-score-5" style="display: none; color: #0ad22b"><b>100.00%</b></p>
                 <p><i>You have infinite submissions remaining.</i></p>
+                <div id="view-answer-5" style="border-radius: 10px; border: 1px solid #000000; padding: 10px; margin-bottom: 10px; display: none;">
+                    <p>Solution: Any you want, or none at all. You got this.</p>
+                </div>
             </div>
 
             <!-- END -->
@@ -284,8 +326,6 @@
                 var text = document.getElementById("green-score-1");
                 if (text.style.display === "none") {
                     text.style.display = "block";
-                } else {
-                    text.style.display = "none";
                 }
             }
         </script>
@@ -295,8 +335,6 @@
                 var text = document.getElementById("green-score-2");
                 if (text.style.display === "none") {
                     text.style.display = "block";
-                } else {
-                    text.style.display = "none";
                 }
             }
         </script>
@@ -306,8 +344,6 @@
                 var text = document.getElementById("green-score-3");
                 if (text.style.display === "none") {
                     text.style.display = "block";
-                } else {
-                    text.style.display = "none";
                 }
             }
         </script>
@@ -317,8 +353,6 @@
                 var text = document.getElementById("green-score-4");
                 if (text.style.display === "none") {
                     text.style.display = "block";
-                } else {
-                    text.style.display = "none";
                 }
             }
         </script>
@@ -326,6 +360,59 @@
         <script>
             function toggleText5() {
                 var text = document.getElementById("green-score-5");
+                if (text.style.display === "none") {
+                    text.style.display = "block";
+                }
+            }
+        </script>
+
+        <script>
+            function toggleViewAnswer1() {
+                var text = document.getElementById("view-answer-1");
+                if (text.style.display === "none") {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+            }
+        </script>
+
+        <script>
+            function toggleViewAnswer2() {
+                var text = document.getElementById("view-answer-2");
+                if (text.style.display === "none") {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+            }
+        </script>
+
+        <script>
+            function toggleViewAnswer3() {
+                var text = document.getElementById("view-answer-3");
+                if (text.style.display === "none") {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+            }
+        </script>
+
+        <script>
+            function toggleViewAnswer4() {
+                var text = document.getElementById("view-answer-4");
+                if (text.style.display === "none") {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+            }
+        </script>
+
+        <script>
+            function toggleViewAnswer5() {
+                var text = document.getElementById("view-answer-5");
                 if (text.style.display === "none") {
                     text.style.display = "block";
                 } else {
